@@ -1,34 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import './global.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { RouterProvider } from 'react-router-dom'
+import { Toaster } from 'sonner'
 
+import { router } from './routes'
+
+export function App() {
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <HelmetProvider>
+      {/**
+        O atributo `titleTemplate` dentro do componente Helmet é configurado com a string "%s | pizza.shop",
+        * onde "%s" é um espaço reservado que será substituído pelo título específico da página ou pelo título
+        * padrão, caso nenhum título específico seja fornecido.
+      **/}
+      <Helmet titleTemplate="%s | pizza.shop" />
+
+      <Toaster richColors />
+
+      <RouterProvider router={router} />
+    </HelmetProvider>
   )
 }
-
-export default App
